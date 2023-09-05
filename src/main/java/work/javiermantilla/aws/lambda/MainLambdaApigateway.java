@@ -20,7 +20,7 @@ public class MainLambdaApigateway {
 		String accessKey="";
 		String secretKey="arn:aws:lambda:us-east-1:954025672155:function:dev-sico2-lambda-authenticator";
 		String region="us-east-1";		
-		MEntryLambda entry = new MEntryLambda(accessKey,secretKey,region, arnLambda);
+		MEntryLambda entry = new MEntryLambda(arnLambda,accessKey,secretKey,region);
 		String mensaje = "{\"typeDocument\":\"1\",\"documentNumber\":\"37896334\",\"password\":\"Q29tZXJjaW8yMDIzKio=\",\"idPlataforma\":226}";
 		APIGatewayV2HTTPEvent event = new APIGatewayV2HTTPEvent();
 		event.setBody(mensaje);

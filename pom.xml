@@ -19,6 +19,8 @@
 		<log4j2.version>2.20.0</log4j2.version>
 		<mockito.version>5.3.1</mockito.version>
 		<org.slf4j.version>2.0.6</org.slf4j.version>
+		<aws.sqs.java.extended.client.lib.version>2.0.3</aws.sqs.java.extended.client.lib.version>
+		<aws.sqs.java.messaging.lib.version>2.1.1</aws.sqs.java.messaging.lib.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -104,6 +106,16 @@
 			<artifactId>lombok</artifactId>
 			<version>1.18.28</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>amazon-sqs-java-messaging-lib</artifactId>
+			<version>${aws.sqs.java.messaging.lib.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>amazon-sqs-java-extended-client-lib</artifactId>
+			<version>${aws.sqs.java.extended.client.lib.version}</version>
 		</dependency>
 	</dependencies>
 	<build>

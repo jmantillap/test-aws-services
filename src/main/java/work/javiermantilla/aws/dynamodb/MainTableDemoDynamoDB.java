@@ -24,7 +24,7 @@ public class MainTableDemoDynamoDB {
 		String secretKey = "";
 		String region = "us-east-1";
 		String nameTable = "CCB_SICO_MAUC_CUSTOMER";
-		MEntryDynamoDB entry = new MEntryDynamoDB(accessKey, secretKey, region, nameTable, urlDynamoDb);
+		MEntryDynamoDB entry = new MEntryDynamoDB(nameTable, urlDynamoDb,accessKey, secretKey, region);
 		DynamoDBMapper mapper = DynamoDBManager.mapper(entry);
 		DynamoDbServices dynamoDbServices = new DynamoDbServices(TableDemoRepository.instance(mapper));
 		LOGGER.info("Entry aws: {}", entry);

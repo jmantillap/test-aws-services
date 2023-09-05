@@ -26,7 +26,7 @@ public class InvoqueLambdaService implements Serializable {
 		LOGGER.info("payload: {}", mensaje);
 		AWSLambda client = AWSLambdaClient.builder()
 				.withCredentials(new AWSStaticCredentialsProvider(
-						new BasicAWSCredentials(entry.getAccesskey(), entry.getSecretkey())))
+						new BasicAWSCredentials(entry.getAccessKey(), entry.getSecretKey())))
 				.withRegion(entry.getRegion()).build();
 		InvokeRequest request = new InvokeRequest();
 		request.withFunctionName(entry.getArnLamda()).withPayload(mensaje);

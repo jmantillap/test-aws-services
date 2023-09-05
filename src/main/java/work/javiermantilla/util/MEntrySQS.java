@@ -11,15 +11,15 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MEntryLambda extends MEntry {	
-	private String arnLamda;
-	
-	public MEntryLambda(String arnLamda, String accessKey, String secretKey, String region ) {
-		super(accessKey, secretKey, region);
-		this.arnLamda = arnLamda;
-		
-	}
+public class MEntrySQS extends MEntry {
+	private String urlCola;
 
+	public MEntrySQS(String urlCola,String accessKey, String secretKey, String region ) {
+		super(accessKey, secretKey, region);
+		this.urlCola = urlCola;		
+	}
+	
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -28,15 +28,15 @@ public class MEntryLambda extends MEntry {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MEntryLambda other = (MEntryLambda) obj;
-		return Objects.equals(arnLamda, other.arnLamda);
+		MEntrySQS other = (MEntrySQS) obj;
+		return Objects.equals(urlCola, other.urlCola);
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(arnLamda);
+		result = prime * result + Objects.hash(urlCola);
 		return result;
 	}
 	
