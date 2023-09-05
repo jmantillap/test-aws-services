@@ -5,9 +5,9 @@ import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
-@ToString
+
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -38,6 +38,12 @@ public class MEntryDynamoDB extends MEntry {
 			return false;
 		MEntryDynamoDB other = (MEntryDynamoDB) obj;
 		return Objects.equals(nameTable, other.nameTable) && Objects.equals(urlDynamoDB, other.urlDynamoDB);
+	}
+
+	@Override
+	public String toString() {
+		return "MEntryDynamoDB [nameTable=" + nameTable + ", urlDynamoDB=" + urlDynamoDB + ", getAccessKey()=" + getAccessKey() + ", getSecretKey()=" + getSecretKey()
+				+ ", getRegion()=" + getRegion() + "]";
 	}
 	
 	

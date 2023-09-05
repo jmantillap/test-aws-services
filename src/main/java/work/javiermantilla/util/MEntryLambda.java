@@ -5,9 +5,9 @@ import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
-@ToString
+
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,6 +38,11 @@ public class MEntryLambda extends MEntry {
 		int result = super.hashCode();
 		result = prime * result + Objects.hash(arnLamda);
 		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "MEntryLambda [arnLamda=" + arnLamda + ", getAccessKey()=" + getAccessKey() + ", getSecretKey()=" + getSecretKey() + ", getRegion()=" + getRegion() + "]";
 	}
 	
 	

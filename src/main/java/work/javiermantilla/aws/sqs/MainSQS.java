@@ -20,6 +20,7 @@ public class MainSQS {
 		MEntrySQS mEntrySQS = new MEntrySQS(urlCola, accessKey, secretKey, region);
 		String mensaje = "{\"typeDocument\":\"1\",\"documentNumber\":\"37896334\",\"password\":\"Q29tZXJjaW8yMDIzKio=\",\"idPlataforma\":226}";
 		SQSServicePub servicePub = new SQSServicePub();
+		LOGGER.info("Entry aws: {}",mEntrySQS);
 		servicePub.enviarmensajeColaSQS(mensaje, mEntrySQS);
 		LOGGER.info("FIN TEST SQS");
 

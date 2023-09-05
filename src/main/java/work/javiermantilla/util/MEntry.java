@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+
 @ToString
 @Data
 @NoArgsConstructor
@@ -14,7 +15,6 @@ import lombok.ToString;
 public class MEntry {
 	private String accessKey;
 	private String secretKey;
-	private String region;
-	
+	private String region;	
 	
 }
