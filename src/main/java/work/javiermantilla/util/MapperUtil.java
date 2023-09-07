@@ -22,10 +22,10 @@ public class MapperUtil implements Serializable {
 	private static final long serialVersionUID = -2531587665281099197L;
 
 	private static final Logger LOGGER = LogManager.getLogger(MapperUtil.class);
-	private ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);	
+	private static ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);	
 
 	
-	public <T> T parseMessageToDto(String bodyContent, Class<T> outPutClass) throws TechnicalException {
+	public static <T> T parseMessageToDto(String bodyContent, Class<T> outPutClass) throws TechnicalException {
 		try {
 			return objectMapper.readValue(bodyContent, outPutClass);
 		} catch (Exception e) {
@@ -34,9 +34,9 @@ public class MapperUtil implements Serializable {
 		}
 	}
 
-	public <T> String getStringJsonFromDTO(T dto) throws TechnicalException {
+	public static <T> String getStringJsonFromDTO(T dto) throws TechnicalException {
 		try {
-			return this.objectMapper.writeValueAsString(dto);
+			return objectMapper.writeValueAsString(dto);
 		} catch (Exception e) {
 			LOGGER.error("Ocurri� error al parsear: {} | {}", dto, e);
 			throw new TechnicalException(ErrorCode.TCH_EXCEPTION_OBJECT_MAPPING.getMessage() + ": " + dto, e);

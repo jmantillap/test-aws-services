@@ -28,7 +28,7 @@ public class InvoqueLambdaService implements Serializable {
 				.withCredentials(new AWSStaticCredentialsProvider(
 						new BasicAWSCredentials(entry.getAccessKey(), entry.getSecretKey())))
 				.withRegion(entry.getRegion()).build();
-		InvokeRequest request = new InvokeRequest();
+		InvokeRequest request = new InvokeRequest();		
 		request.withFunctionName(entry.getArnLamda()).withPayload(mensaje);
 		InvokeResult invoke = client.invoke(request);
 		LOGGER.info("Resultado de la invocacion: {}", invoke);
