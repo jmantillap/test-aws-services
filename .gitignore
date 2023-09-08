@@ -34,5 +34,7 @@ build/
 
 ####properties##
 **/resources/config.properties
+/src/main/resources/config.properties
+
 
 
