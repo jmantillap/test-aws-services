@@ -9,7 +9,9 @@ import work.javiermantilla.aws.dynamodb.config.DynamoDBManager;
 import work.javiermantilla.aws.dynamodb.entity.TableDemoEntity;
 import work.javiermantilla.aws.dynamodb.repository.TableDemoRepository;
 import work.javiermantilla.aws.dynamodb.service.DynamoDbServices;
+import work.javiermantilla.util.ConstantsTest;
 import work.javiermantilla.util.MEntryDynamoDB;
+import work.javiermantilla.util.PropertiesTestUtil;
 
 public class MainTableDemoDynamoDB {
 
@@ -19,11 +21,11 @@ public class MainTableDemoDynamoDB {
 
 		LOGGER.info("Inicial el proceso para la insercion en table demo");
 
-		String urlDynamoDb = "dynamodb.us-east-1.amazonaws.com";
-		String accessKey = "";
-		String secretKey = "";
-		String region = "us-east-1";
-		String nameTable = "CCB_SICO_MAUC_CUSTOMER";
+		String urlDynamoDb = PropertiesTestUtil.getProperty(ConstantsTest.DYNAMO_URL);
+		String accessKey = PropertiesTestUtil.getProperty(ConstantsTest.VAR_ACCESSKEY);
+		String secretKey = PropertiesTestUtil.getProperty(ConstantsTest.VAR_SECRETKEY);
+		String region = PropertiesTestUtil.getProperty(ConstantsTest.VAR_REGION);
+		String nameTable = PropertiesTestUtil.getProperty(ConstantsTest.DYNAMO_TABLE);;
 		MEntryDynamoDB entry = new MEntryDynamoDB(nameTable, urlDynamoDb,accessKey, secretKey, region);
 		DynamoDBMapper mapper = DynamoDBManager.mapper(entry);
 		DynamoDbServices dynamoDbServices = new DynamoDbServices(TableDemoRepository.instance(mapper));

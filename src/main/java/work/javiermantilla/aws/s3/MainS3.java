@@ -6,14 +6,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import work.javiermantilla.aws.s3.services.S3Services;
+import work.javiermantilla.util.ConstantsTest;
 import work.javiermantilla.util.MEntryS3;
+import work.javiermantilla.util.PropertiesTestUtil;
 
 public class MainS3 {
 
-	private static String nameBucket = "";
-	private static String accessKey = "";
-	private static String secretKey = "";
-	private static String region = "us-east-1";
+	
 	private static S3Services s3Services;
 	private static MEntryS3 entry;
 
@@ -38,6 +37,12 @@ public class MainS3 {
 	}
 
 	private static void loadEntry() {
+		
+		String accessKey = PropertiesTestUtil.getProperty(ConstantsTest.VAR_ACCESSKEY);
+		String secretKey = PropertiesTestUtil.getProperty(ConstantsTest.VAR_SECRETKEY);
+		String region = PropertiesTestUtil.getProperty(ConstantsTest.VAR_REGION);
+		String nameBucket = PropertiesTestUtil.getProperty(ConstantsTest.S3_BUCKET);
+		
 		entry = new MEntryS3(nameBucket, accessKey, secretKey, region);
 	}
 
