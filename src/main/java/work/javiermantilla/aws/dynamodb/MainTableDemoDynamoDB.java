@@ -25,28 +25,55 @@ public class MainTableDemoDynamoDB {
 		String accessKey = PropertiesTestUtil.getProperty(ConstantsTest.VAR_ACCESSKEY);
 		String secretKey = PropertiesTestUtil.getProperty(ConstantsTest.VAR_SECRETKEY);
 		String region = PropertiesTestUtil.getProperty(ConstantsTest.VAR_REGION);
-		String nameTable = PropertiesTestUtil.getProperty(ConstantsTest.DYNAMO_TABLE);;
+		String nameTable = PropertiesTestUtil.getProperty(ConstantsTest.DYNAMO_TABLE);
 		MEntryDynamoDB entry = new MEntryDynamoDB(nameTable, urlDynamoDb,accessKey, secretKey, region);
 		DynamoDBMapper mapper = DynamoDBManager.mapper(entry);
 		DynamoDbServices dynamoDbServices = new DynamoDbServices(TableDemoRepository.instance(mapper));
 		LOGGER.info("Entry aws: {}", entry);
-		TableDemoEntity tableDemoEntity1 = TableDemoEntity.builder().userName("113544000")
-				.email("jmantillap@hotmail.com").numberAttempts(0).passwordExpires("2023-10-01T00:00:00").blocked(false)
-				.build();
-
-		dynamoDbServices.saveOrUpdateTable(tableDemoEntity1);
+		
+		dynamoDbServices.listUsers();
+		
+//		TableDemoEntity tableDemoEntity1 = TableDemoEntity.builder().userName("113544000")
+//				.email("jmantillap@hotmail.com").numberAttempts(0).passwordExpires("2023-10-01T00:00:00").blocked(false)
+//				.build();
+//
+//		dynamoDbServices.saveOrUpdateTable(tableDemoEntity1);
 
 		TableDemoEntity tableDemoEntity2 = TableDemoEntity.builder().userName("137896334")
-				.email("eliana.bravovesga@gmail.com").numberAttempts(0).passwordExpires("2099-08-30T00:00:00")
+				.email("eliana.bravovesga@gmail.com")
+				.numberAttempts(0)
+				.passwordExpires("2023-10-06T00:00:00")
 				.blocked(false).build();
 
 		dynamoDbServices.saveOrUpdateTable(tableDemoEntity2);
 
-		TableDemoEntity tableDemoEntity3 = TableDemoEntity.builder().userName("113544000")
-				.email("jmantillap@hotmail.com").numberAttempts(0).passwordExpires("2023-10-01T00:00:00").blocked(false)
+//		TableDemoEntity tableDemoEntity3 = TableDemoEntity.builder().userName("13822225")
+//				.email("jmantillap@hotmail.com")
+//				.numberAttempts(0)
+//				.passwordExpires("2023-10-01T00:00:00").blocked(false)
+//				.build();
+//
+//		dynamoDbServices.saveOrUpdateTable(tableDemoEntity3);
+//		
+//		TableDemoEntity tableDemoEntity4 = TableDemoEntity.builder().userName("128131633")
+//				.email("ing.javiermantilla@gmail.com").numberAttempts(0).passwordExpires("2023-10-14T00:00:00").blocked(false)
+//				.build();
+//		dynamoDbServices.saveOrUpdateTable(tableDemoEntity4);
+//		
+//		TableDemoEntity tableDemoEntity5 = TableDemoEntity.builder().userName("113544171")
+//				.email("jmantillap@gmail.com").numberAttempts(0).passwordExpires("2023-10-01T00:00:00").blocked(false)
+//				.build();
+//
+//		dynamoDbServices.saveOrUpdateTable(tableDemoEntity5);
+		
+		/*
+		TableDemoEntity tableDemoEntityEliminar = TableDemoEntity.builder().userName("128131633")
+				.email("ing.javiermantilla@gmail.com").numberAttempts(0).passwordExpires("2023-10-14T00:00:00").blocked(false)
 				.build();
-
-		dynamoDbServices.saveOrUpdateTable(tableDemoEntity3);
+		dynamoDbServices.deleteRow(tableDemoEntity5);
+		*/
+		
+		dynamoDbServices.listUsers();
 
 	}
 }

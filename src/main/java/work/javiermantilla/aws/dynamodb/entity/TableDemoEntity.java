@@ -21,7 +21,6 @@ import lombok.ToString;
  * @since Ago/2023
  */
 @Data
-@ToString
 @AllArgsConstructor
 @Builder
 public class TableDemoEntity implements Serializable {
@@ -68,5 +67,14 @@ public class TableDemoEntity implements Serializable {
 		this.password = password;
 		this.passwordExpires = passwordExpires;
 	}
+
+
+	@Override
+	public String toString() {
+		return "TableDemoEntity [userName=" + userName + ", email=" + email + ", blocked=" + blocked + ", numberAttempts=" + numberAttempts + ", password=" + password
+				+ ", passwordExpires=" + passwordExpires + "]";
+	}
+	
+	
 
 }

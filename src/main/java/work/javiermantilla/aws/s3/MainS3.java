@@ -1,6 +1,7 @@
 package work.javiermantilla.aws.s3;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,18 +25,38 @@ public class MainS3 {
 		LOGGER.info("Inicial el servicio de S3 Listar los objetos del bucket");
 		s3Services.listBucketObjects();
 		LOGGER.info("Creacion de archivo");
-		subirArchivo();
+		//subirArchivo();
+		bajarArchivo();
+		
 
 	}
 
 	public static void subirArchivo() {
 
-		String url="C:\\Users\\javier.mantilla\\Proyecto-CCB\\ccb_fuentes_sico2\\ccb_login_tables.yaml";
+		//String url="C:\\Users\\javier.mantilla\\Proyecto-CCB\\ccb_fuentes_sico2\\ccb_login_tables.yaml";
+		String url="C:\\Users\\javier.mantilla\\OneDrive - SoftwareONE\\Pictures\\apollo-mission-operations-control-room.jpg";
+		
+		
 		File file = new File(url);
-		s3Services.uploadObject("ccb_login_tables.yaml", file);
+		s3Services.uploadObject("apollo-mission-operations-control-room.jpg", file);
 
 	}
+	
+	public static void bajarArchivo() {
 
+		//String url="C:\\Users\\javier.mantilla\\Proyecto-CCB\\ccb_fuentes_sico2\\ccb_login_tables.yaml";
+		String url="C:\\Users\\javier.mantilla\\OneDrive - SoftwareONE\\Pictures\\nuevaImagen.jpg";		
+		File file = new File(url);
+		try {
+			//s3Services.downloadObject("apollo-mission-operations-control-room.jpg", file );
+			s3Services.downloadObject1("apollo-mission-operations-control-room.jpg", file );
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
 	private static void loadEntry() {
 		
 		String accessKey = PropertiesTestUtil.getProperty(ConstantsTest.VAR_ACCESSKEY);

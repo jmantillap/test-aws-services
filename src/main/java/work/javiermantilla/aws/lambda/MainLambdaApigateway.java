@@ -24,7 +24,12 @@ public class MainLambdaApigateway {
 		String secretKey = PropertiesTestUtil.getProperty(ConstantsTest.VAR_SECRETKEY);
 		String region = PropertiesTestUtil.getProperty(ConstantsTest.VAR_REGION);		
 		MEntryLambda entry = new MEntryLambda(arnLambda,accessKey,secretKey,region);
-		String mensaje = "{\"typeDocument\":\"1\",\"documentNumber\":\"37896334\",\"password\":\"Q29tZXJjaW8yMDIzKio=\",\"idPlataforma\":226}";
+		String mensaje = "{\r\n"
+				+ "	\"typeDocument\": \"1\",\r\n"
+				+ "	\"documentNumber\": \"13544171\",\r\n"
+				+ "	\"password\": \"Q29tZXJjaW8yMDIzKg==\",\r\n"
+				+ "	\"idPlataforma\": 226\r\n"
+				+ "}";
 		APIGatewayV2HTTPEvent event = new APIGatewayV2HTTPEvent();
 		event.setBody(mensaje);
 		LOGGER.info("Entry aws: {}",entry);

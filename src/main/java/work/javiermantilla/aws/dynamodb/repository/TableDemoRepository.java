@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 
 import work.javiermantilla.aws.dynamodb.entity.TableDemoEntity;
 import work.javiermantilla.exception.ErrorCode;
@@ -72,14 +73,20 @@ public class TableDemoRepository {
 	}
 
 	public void deleteTableRow(String userName, String email) throws TechnicalException {
-
+		LOGGER.info("Se va a eliminar username: {}, email: {} ", userName,email);
 		Optional<TableDemoEntity> oTableDemo = findTableByUserNameAndEmail(userName, email);
 		if (oTableDemo.isPresent()) {
 			mapper.delete(oTableDemo.get());
+			LOGGER.info("Se elimino username: {}, email: {} ", userName,email);
 		} else {
 			LOGGER.error("Could not delete event, no such team and date combination : {} | {}", userName,email);			
 			throw new IllegalArgumentException("Delete failed for nonexistent event");
 		}
+	}
+	
+	
+	public List<TableDemoEntity> findAllUsers(){		
+		return mapper.scan(TableDemoEntity.class, new DynamoDBScanExpression());
 	}
 
 	/**
