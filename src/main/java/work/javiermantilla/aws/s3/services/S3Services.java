@@ -12,6 +12,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -40,7 +41,8 @@ public class S3Services {
 
 		this.entry = mEntryS3;
 		AWSCredentials credentials = new BasicAWSCredentials(entry.getAccessKey(), entry.getSecretKey());
-		this.s3Client = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(credentials)).withRegion(entry.getRegion()).build();
+		this.s3Client = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(credentials))
+				.withRegion(entry.getRegion()).build();
 
 	}
 
@@ -63,16 +65,16 @@ public class S3Services {
 
 	public void downloadObject(String nombreArchivoKey, File fileDestino) throws IOException {
 		// https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javav2/example_code/s3/src/main/java/com/example/s3/GetObjectData.java
-		GetObjectRequest objectRequest = new GetObjectRequest(entry.getNameBucket(),nombreArchivoKey);
+		GetObjectRequest objectRequest = new GetObjectRequest(entry.getNameBucket(), nombreArchivoKey);
 
 		S3Object object = this.s3Client.getObject(objectRequest);
-		
+
 		InputStream reader = new BufferedInputStream(object.getObjectContent());
 		OutputStream writer = new BufferedOutputStream(new FileOutputStream(fileDestino));
 		int read = -1;
 
-		while ( ( read = reader.read() ) != -1 ) {
-		    writer.write(read);
+		while ((read = reader.read()) != -1) {
+			writer.write(read);
 		}
 		writer.flush();
 		writer.close();
@@ -80,15 +82,25 @@ public class S3Services {
 		LOGGER.info("El archivo se descargo a : {}", fileDestino.getAbsolutePath());
 
 	}
-	
+
 	public void downloadObject1(String nombreArchivoKey, File fileDestino) throws IOException {
 		// https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javav2/example_code/s3/src/main/java/com/example/s3/GetObjectData.java
-		GetObjectRequest objectRequest = new GetObjectRequest(entry.getNameBucket(),nombreArchivoKey);
+		GetObjectRequest objectRequest = new GetObjectRequest(entry.getNameBucket(), nombreArchivoKey);
 
-		ObjectMetadata object = this.s3Client.getObject(objectRequest,fileDestino);
-		//boolean success = fileDestino.exists() && fileDestino.canRead();		
+		ObjectMetadata object = this.s3Client.getObject(objectRequest, fileDestino);
+		// boolean success = fileDestino.exists() && fileDestino.canRead();
 		LOGGER.info("El archivo se descargo a downloadObject1 : {}", fileDestino.getAbsolutePath());
 
+	}
+
+	public void deleteObject(String nombreArchivoKey) {
+		// https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/java/example_code/s3/src/main/java/aws/example/s3/DeleteObject.java
+		try {
+			this.s3Client.deleteObject(entry.getNameBucket(), nombreArchivoKey);
+		} catch (AmazonServiceException e) {
+			System.err.println(e.getErrorMessage());
+			System.exit(1);
+		}
 	}
 
 }

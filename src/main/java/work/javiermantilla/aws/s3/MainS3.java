@@ -23,22 +23,22 @@ public class MainS3 {
 		loadEntry();
 		s3Services = new S3Services(entry);
 		LOGGER.info("Inicial el servicio de S3 Listar los objetos del bucket");
+		s3Services.listBucketObjects();		
+		subirArchivo();
+		//bajarArchivo();
+		//eliminarArchivo();
 		s3Services.listBucketObjects();
-		LOGGER.info("Creacion de archivo");
-		//subirArchivo();
-		bajarArchivo();
-		
 
 	}
 
 	public static void subirArchivo() {
-
+		LOGGER.info("Creacion de archivo");
 		//String url="C:\\Users\\javier.mantilla\\Proyecto-CCB\\ccb_fuentes_sico2\\ccb_login_tables.yaml";
-		String url="C:\\Users\\javier.mantilla\\OneDrive - SoftwareONE\\Pictures\\apollo-mission-operations-control-room.jpg";
-		
-		
+		String url="C:\\Users\\javier.mantilla\\Downloads\\templates\\RadicacionPersonaNatural.ftl";
+				
 		File file = new File(url);
-		s3Services.uploadObject("apollo-mission-operations-control-room.jpg", file);
+		s3Services.uploadObject("templates/RadicacionPersonaNatural.ftl", file);
+			
 
 	}
 	
@@ -51,10 +51,15 @@ public class MainS3 {
 			//s3Services.downloadObject("apollo-mission-operations-control-room.jpg", file );
 			s3Services.downloadObject1("apollo-mission-operations-control-room.jpg", file );
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
+	}
+	
+	public static void eliminarArchivo() {
+		String s3KeyFile= "templates/terminosCondicionesSolicitud.pdf";
+		s3Services.deleteObject(s3KeyFile);
+		LOGGER.info("Se elimino el archivo: {}",s3KeyFile);
 	}
 	
 	private static void loadEntry() {
