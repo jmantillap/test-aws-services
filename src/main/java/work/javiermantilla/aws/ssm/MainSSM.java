@@ -21,7 +21,7 @@ public class MainSSM {
 		LOGGER.info("Valor /parametro/valor : {}",ssmServices.getParameterStore("/parametro/valor"));
 		
 		LOGGER.info("Inicial el servicio ssm para obtener un parametro de tipo SecurityString ");
-		LOGGER.info("Valor /parametro/valor : {}",ssmServices.getParameterStoreSecurityString("/parametro/pass"));
+		LOGGER.info("Valor /parametro/pass : {}",ssmServices.getParameterStoreSecurityString("/parametro/pass"));
 		
 	}
 

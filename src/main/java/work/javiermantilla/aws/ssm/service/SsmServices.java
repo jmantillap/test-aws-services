@@ -17,19 +17,22 @@ import work.javiermantilla.util.MEntryS3;
 public class SsmServices {
 	private static final Logger LOGGER = LogManager.getLogger(SsmServices.class);
 
-	private MEntryS3 entry;
+	
 	private SsmClient ssmClient;
 
 	public SsmServices(MEntryS3 entry) {
+	
 		AwsBasicCredentials awsCreds = AwsBasicCredentials.create(entry.getAccessKey(), entry.getSecretKey());
 
 		// credenciales de rol IAM de servicios
-//		ssmClient = SsmClient.builder().credentialsProvider(EnvironmentVariableCredentialsProvider.create())
-//				.region(Region.US_EAST_1).build();
-
-		// credenciales programaticas
-		ssmClient = SsmClient.builder().credentialsProvider(StaticCredentialsProvider.create(awsCreds))
-				.region(Region.US_EAST_1).build();
+		if(entry.getAccessKey()==null) {
+			ssmClient = SsmClient.builder().credentialsProvider(EnvironmentVariableCredentialsProvider.create())
+					.region(Region.US_EAST_1).build();
+		}else {
+			// credenciales programaticas
+			ssmClient = SsmClient.builder().credentialsProvider(StaticCredentialsProvider.create(awsCreds))
+					.region(Region.US_EAST_1).build();
+		}
 	}
 
 	public String getParameterStore(String name) {
